@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace LegoStickers
 {
@@ -15,11 +17,18 @@ namespace LegoStickers
             var parts = Database.LoadParts().Where(_ => _.InventoryId == inventory.Id).ToList();
 
             var doc = new StickerDocument();
-            
+
+            var printedSets = new HashSet<string>();
             foreach (var part in parts)
             {
+                if (printedSets.Contains(part.PartNumber))
+                {
+                    continue;
+                }
+                
                 part.PartPicture = Database.PartPicturePath(part);
-                doc.AddPart(part);                
+                doc.AddPart(part);
+                printedSets.Add(part.PartNumber);
             }
 
             doc.Save("stickers.docx");
