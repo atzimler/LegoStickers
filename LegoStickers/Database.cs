@@ -12,13 +12,13 @@ namespace LegoStickers
         private static readonly Dictionary<string, PartInformationRecord> PartInformationRecords
             = new Dictionary<string, PartInformationRecord>();
 
-        private static string PartPicturePath(string colorId, string partNumber, string colorName)
+        public static string PartPicturePath(PartRecord part)
         {
-            var directory = $"parts_{colorId}";
-            var path = Path.Combine(directory, $"{partNumber}.png");
+            var directory = $"parts_{part.ColorId}";
+            var path = Path.Combine(directory, $"{part.PartNumber}.png");
             if (!Directory.Exists(directory))
             {
-                throw new DirectoryNotFoundException($"Directory {directory} not found (color name: {colorName})");
+                throw new DirectoryNotFoundException($"Directory {directory} not found (color name: {part.ColorName})");
             }
 
             return path;
@@ -75,8 +75,7 @@ namespace LegoStickers
                         ColorName = colorName,
                         Quantity = fields[3],
                         IsSpare = fields[4] == "t",
-                        ElementIds = ElementIds.Get(fields[1], fields[2]),
-                        PartPicture = PartPicturePath(fields[2], fields[1], colorName)
+                        ElementIds = ElementIds.Get(fields[1], fields[2])
                     };
                 });
 

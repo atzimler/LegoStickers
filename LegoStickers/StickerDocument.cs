@@ -8,6 +8,7 @@ namespace LegoStickers
     public class StickerDocument
     {
         private int _currentColumn;
+        private int _currentPart;
         private IWTable _currentTable;
         private readonly WordDocument _document = new WordDocument();
         private readonly IWSection _section;
@@ -34,6 +35,13 @@ namespace LegoStickers
 
         public void AddPart(PartRecord part)
         {
+            if (_currentPart == 9)
+            {
+                _section.AddParagraph().AppendBreak(BreakType.PageBreak);
+                _currentPart = 0;
+            }
+            _currentPart++;
+            
             if (_currentColumn == 0)
             {
                 AddTable();
@@ -52,8 +60,8 @@ namespace LegoStickers
                     var paragraph = cell.AddParagraph();
                     paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Center;
                     var picture = paragraph.AppendPicture(fs);
-                    picture.Height = 142;
-                    picture.Width = 142;
+                    picture.Height = 112;
+                    picture.Width = 112;
                     cell.AddParagraph();
                     cell.CellFormat.VerticalAlignment = VerticalAlignment.Middle;
                 }

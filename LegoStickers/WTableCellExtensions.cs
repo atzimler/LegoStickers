@@ -7,6 +7,11 @@ namespace LegoStickers
     {
         public static void SetContent(this WTableCell cell, string text, float fontSize, Color color)
         {
+            if (text == null)
+            {
+                return;
+            }
+            
             var textRange = cell.AddParagraph().AppendText(text);
             textRange.CharacterFormat.FontName = "Calibri";
             textRange.CharacterFormat.Bold = true;

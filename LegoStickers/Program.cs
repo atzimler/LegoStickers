@@ -18,6 +18,7 @@ namespace LegoStickers
             
             foreach (var part in parts)
             {
+                part.PartPicture = Database.PartPicturePath(part);
                 doc.AddPart(part);                
             }
 
