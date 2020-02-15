@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
 using Syncfusion.DocIO;
 using Syncfusion.DocIO.DLS;
 using Syncfusion.Drawing;
@@ -21,6 +23,21 @@ namespace LegoStickers
     {
         public static void Main(string[] args)
         {
+            ElementIds.Load();
+            Database.LoadColors();
+            Database.LoadPartCategories();
+            Database.LoadPartInformation();
+            
+            var inventory = Database.LoadInventories().First(_ => _.SetNumber == "75192-1");
+            var parts = Database.LoadParts().Where(_ => _.InventoryId == inventory.Id).ToList();
+            foreach (var part in parts.Where(_ => _.PartNumber == "2445"))
+            {
+                Console.WriteLine($"{part.PartNumber}, {part.PartName}, {part.CategoryName}, {part.ColorName}, {part.ElementIds}");
+            }
+
+            return;
+            
+            
             var doc = new WordDocument();
 
             var section = doc.AddSection();

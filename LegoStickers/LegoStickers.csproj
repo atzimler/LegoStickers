@@ -58,6 +58,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColorRecord.cs" />
+    <Compile Include="Database.cs" />
+    <Compile Include="ElementIds.cs" />
+    <Compile Include="InventoryRecord.cs" />
+    <Compile Include="PartCategoryRecord.cs" />
+    <Compile Include="PartInformationRecord.cs" />
+    <Compile Include="PartRecord.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
