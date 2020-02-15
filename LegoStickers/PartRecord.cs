@@ -11,5 +11,6 @@ namespace LegoStickers
         public string Quantity { get; set; }
         public bool IsSpare { get; set; }
         public string ElementIds { get; set; }
+        public string PartPicture { get; set; }
     }
 }

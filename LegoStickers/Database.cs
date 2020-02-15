@@ -7,10 +7,22 @@ namespace LegoStickers
     public static class Database
     {
         private static readonly Dictionary<string, ColorRecord> ColorRecords = new Dictionary<string, ColorRecord>();
-        private static readonly Dictionary<string, PartCategoryRecord> PartCategoryRecords 
+        private static readonly Dictionary<string, PartCategoryRecord> PartCategoryRecords
             = new Dictionary<string, PartCategoryRecord>();
-        private static readonly Dictionary<string, PartInformationRecord> PartInformationRecords 
+        private static readonly Dictionary<string, PartInformationRecord> PartInformationRecords
             = new Dictionary<string, PartInformationRecord>();
+
+        private static string PartPicturePath(string colorId, string partNumber, string colorName)
+        {
+            var directory = $"parts_{colorId}";
+            var path = Path.Combine(directory, $"{partNumber}.png");
+            if (!Directory.Exists(directory))
+            {
+                throw new DirectoryNotFoundException($"Directory {directory} not found (color name: {colorName})");
+            }
+
+            return path;
+        }
 
         public static void LoadColors()
         {
@@ -50,17 +62,22 @@ namespace LegoStickers
                 .ReadAllLines("inventory_parts.csv")
                 .Skip(1)
                 .Select(line => line.Split(','))
-                .Select(fields => new PartRecord
+                .Select(fields =>
                 {
-                    InventoryId = fields[0],
-                    PartNumber = fields[1],
-                    PartName = PartInformationRecords.ContainsKey(fields[1])? PartInformationRecords[fields[1]].Name : null,
-                    CategoryName = PartInformationRecords.ContainsKey(fields[1])? PartInformationRecords[fields[1]].PartCategoryName : null,
-                    ColorId = fields[2],
-                    ColorName = ColorRecords.ContainsKey(fields[2])? ColorRecords[fields[2]].Name : null,
-                    Quantity = fields[3],
-                    IsSpare = fields[4] == "t",
-                    ElementIds = ElementIds.Get(fields[1], fields[2])
+                    var colorName = ColorRecords.ContainsKey(fields[2]) ? ColorRecords[fields[2]].Name : null;
+                    return new PartRecord
+                    {
+                        InventoryId = fields[0],
+                        PartNumber = fields[1],
+                        PartName = PartInformationRecords.ContainsKey(fields[1]) ? PartInformationRecords[fields[1]].Name : null,
+                        CategoryName = PartInformationRecords.ContainsKey(fields[1]) ? PartInformationRecords[fields[1]].PartCategoryName : null,
+                        ColorId = fields[2],
+                        ColorName = colorName,
+                        Quantity = fields[3],
+                        IsSpare = fields[4] == "t",
+                        ElementIds = ElementIds.Get(fields[1], fields[2]),
+                        PartPicture = PartPicturePath(fields[2], fields[1], colorName)
+                    };
                 });
 
         public static void LoadPartCategories()
