@@ -18,17 +18,22 @@ namespace LegoStickers
 
             var doc = new StickerDocument();
 
-            var printedSets = new HashSet<string>();
+            var printed = new Dictionary<string, List<string>>(); 
             foreach (var part in parts)
             {
-                if (printedSets.Contains(part.PartNumber))
+                if (printed.ContainsKey(part.PartNumber) && printed[part.PartNumber].Contains(part.ColorName))
                 {
                     continue;
+                }
+
+                if (!printed.ContainsKey(part.PartNumber))
+                {
+                    printed.Add(part.PartNumber, new List<string>());
                 }
                 
                 part.PartPicture = Database.PartPicturePath(part);
                 doc.AddPart(part);
-                printedSets.Add(part.PartNumber);
+                printed[part.PartNumber].Add(part.ColorName);
             }
 
             doc.Save("stickers.docx");
