@@ -14,8 +14,13 @@ namespace LegoStickers
             Database.LoadPartInformation();
 
             var inventory = Database.LoadInventories().First(_ => _.SetNumber == "75192-1");
-            var parts = Database.LoadParts().Where(_ => _.InventoryId == inventory.Id).ToList();
-
+            var parts = Database
+                .LoadParts()
+                .Where(_ => _.InventoryId == inventory.Id)
+                .Where(_ => _.ColorId == "71")
+                .OrderBy(_ => _.ColorName).ThenBy(_ => _.CategoryName)
+                .ToList();
+            
             var doc = new StickerDocument();
 
             var printed = new Dictionary<string, List<string>>(); 
