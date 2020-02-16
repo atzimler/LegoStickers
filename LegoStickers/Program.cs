@@ -18,7 +18,7 @@ namespace LegoStickers
                 .LoadParts()
                 .Where(_ => _.InventoryId == inventory.Id)
                 .Where(_ => _.ColorId == "71")
-                .OrderBy(_ => _.ColorName).ThenBy(_ => _.CategoryName)
+                .OrderBy(_ => _.ColorName).ThenBy(_ => _.CategoryName).ThenBy(_ => _.PartNumber)
                 .ToList();
             
             var doc = new StickerDocument();
