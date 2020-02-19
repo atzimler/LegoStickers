@@ -13,11 +13,11 @@ namespace LegoStickers
             Database.LoadPartCategories();
             Database.LoadPartInformation();
 
-            var inventory = Database.LoadInventories().First(_ => _.SetNumber == "75192-1");
+            var inventory = Database.LoadInventories().First(_ => _.SetNumber == "42078-1");
             var parts = Database
                 .LoadParts()
                 .Where(_ => _.InventoryId == inventory.Id)
-                .Where(_ => _.ColorId == "71")
+//                .Where(_ =>_.ElementIds != null && (_.ElementIds.Contains("6112684") || _.ElementIds.Contains("6191556")))
                 .OrderBy(_ => _.ColorName).ThenBy(_ => _.CategoryName).ThenBy(_ => _.PartNumber)
                 .ToList();
             

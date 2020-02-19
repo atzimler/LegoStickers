@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using Syncfusion.DocIO;
 using Syncfusion.DocIO.DLS;
@@ -11,6 +12,7 @@ namespace LegoStickers
         private int _currentPart;
         private IWTable _currentTable;
         private readonly WordDocument _document = new WordDocument();
+        private string _lastPrintedColor;
         private readonly IWSection _section;
         
         public StickerDocument()
@@ -33,12 +35,18 @@ namespace LegoStickers
             }
         }
 
+        private void AddPageBreak()
+        {
+            _section.AddParagraph().AppendBreak(BreakType.PageBreak);
+            _currentPart = 0;
+            _currentColumn = 0;
+        }
+
         public void AddPart(PartRecord part)
         {
-            if (_currentPart == 9)
+            if (_currentPart == 9 || _lastPrintedColor != null && _lastPrintedColor != part.ColorName)
             {
-                _section.AddParagraph().AppendBreak(BreakType.PageBreak);
-                _currentPart = 0;
+                AddPageBreak();
             }
             _currentPart++;
             
@@ -66,6 +74,7 @@ namespace LegoStickers
                     cell.CellFormat.VerticalAlignment = VerticalAlignment.Middle;
                 }
 
+            _lastPrintedColor = part.ColorName;
             _currentColumn = ++_currentColumn % 3;
         }
 

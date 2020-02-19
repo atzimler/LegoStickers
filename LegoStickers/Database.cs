@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,13 +15,23 @@ namespace LegoStickers
 
         public static string PartPicturePath(PartRecord part)
         {
-            var directory = $"parts_{part.ColorId}";
-            var path = Path.Combine(directory, $"{part.PartNumber}.png");
+            if (part.CategoryName == "Stickers")
+            {
+                return null;
+            }
+            
+            var directory = Path.Combine(Paths.PictureDirectory, $"parts_{part.ColorId}");
             if (!Directory.Exists(directory))
             {
-                throw new DirectoryNotFoundException($"Directory {directory} not found (color name: {part.ColorName})");
+                Console.WriteLine($"Directory {directory} not found (color name: {part.ColorName})");
+                return null;
             }
 
+            var path = Path.Combine(directory, $"{part.PartNumber}.png");
+            if (!File.Exists(path))
+            {
+                Console.WriteLine($"Missing picture from {part.ColorId}: {part.PartNumber}, {part.ElementIds}");
+            }
             return path;
         }
 
