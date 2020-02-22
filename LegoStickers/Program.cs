@@ -13,7 +13,7 @@ namespace LegoStickers
             Database.LoadPartCategories();
             Database.LoadPartInformation();
 
-            var inventory = Database.LoadInventories().First(_ => _.SetNumber == "42078-1");
+            var inventory = Database.LoadInventories().First(_ => _.SetNumber == "60197-1");
             var parts = Database
                 .LoadParts()
                 .Where(_ => _.InventoryId == inventory.Id)

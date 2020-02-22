@@ -30,7 +30,7 @@ namespace LegoStickers
             var path = Path.Combine(directory, $"{part.PartNumber}.png");
             if (!File.Exists(path))
             {
-                Console.WriteLine($"Missing picture from {part.ColorId}: {part.PartNumber}, {part.ElementIds}");
+                Console.WriteLine($"Missing picture from {part.ColorId}: {part.PartNumber} - element id: {part.ElementIds}");
             }
             return path;
         }
@@ -88,7 +88,8 @@ namespace LegoStickers
                         IsSpare = fields[4] == "t",
                         ElementIds = ElementIds.Get(fields[1], fields[2])
                     };
-                });
+                })
+                .Where(_ => _.ElementIds != null && _.CategoryName != "Stickers");
 
         public static void LoadPartCategories()
         {
