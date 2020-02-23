@@ -37,9 +37,7 @@ namespace LegoStickers
 
         public static void LoadColors()
         {
-            var fieldsSets = File
-                .ReadAllLines("colors.csv")
-                .Skip(1)
+            var fieldsSets = CsvFiles.Load("colors.csv")
                 .Select(line => line.Split(','));
 
             ColorRecords.Clear();
@@ -57,9 +55,7 @@ namespace LegoStickers
         
 
         public static IEnumerable<InventoryRecord> LoadInventories() =>
-            File
-                .ReadAllLines("inventories.csv")
-                .Skip(1)
+            CsvFiles.Load("inventories.csv")
                 .Select(line => line.Split(','))
                 .Select(fields => new InventoryRecord
                 {
@@ -69,9 +65,7 @@ namespace LegoStickers
                 });
 
         public static IEnumerable<PartRecord> LoadParts() =>
-            File
-                .ReadAllLines("inventory_parts.csv")
-                .Skip(1)
+            CsvFiles.Load("inventory_parts.csv")
                 .Select(line => line.Split(','))
                 .Select(fields =>
                 {
@@ -93,9 +87,7 @@ namespace LegoStickers
 
         public static void LoadPartCategories()
         {
-            var fieldsSets = File
-                .ReadAllLines("part_categories.csv")
-                .Skip(1)
+            var fieldsSets = CsvFiles.Load("part_categories.csv")
                 .Select(line => line.Split(','));
 
             PartCategoryRecords.Clear();
@@ -111,9 +103,7 @@ namespace LegoStickers
 
         public static void LoadPartInformation()
         {
-            var fieldsSets = File
-                .ReadAllLines("parts.csv")
-                .Skip(1)
+            var fieldsSets = CsvFiles.Load("parts.csv")
                 .Select(line => line.Split(','));
 
             PartInformationRecords.Clear();

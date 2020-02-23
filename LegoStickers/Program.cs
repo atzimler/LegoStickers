@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace LegoStickers
@@ -17,7 +16,7 @@ namespace LegoStickers
             var parts = Database
                 .LoadParts()
                 .Where(_ => _.InventoryId == inventory.Id)
-//                .Where(_ =>_.ElementIds != null && (_.ElementIds.Contains("6112684") || _.ElementIds.Contains("6191556")))
+                .Where(_ =>_.ElementIds != null && (_.ElementIds.Contains("4549999") || _.ElementIds.Contains("6214560")))
                 .OrderBy(_ => _.ColorName).ThenBy(_ => _.CategoryName).ThenBy(_ => _.PartNumber)
                 .ToList();
             

@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColorRecord.cs" />
+    <Compile Include="CsvFiles.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="ElementIds.cs" />
     <Compile Include="InventoryRecord.cs" />

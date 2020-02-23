@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace LegoStickers
@@ -11,9 +10,8 @@ namespace LegoStickers
 
         public static void Load()
         {
-            var fieldsSets = File
-                .ReadAllLines("elements.csv")
-                .Skip(1)
+            var fieldsSets = CsvFiles
+                .Load("elements.csv")
                 .Select(line => line.Split(','));
 
             Data.Clear();
