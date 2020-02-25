@@ -30,7 +30,7 @@ namespace LegoStickers
             var path = Path.Combine(directory, $"{part.PartNumber}.png");
             if (!File.Exists(path))
             {
-                Console.WriteLine($"Missing picture from {part.ColorId}: {part.PartNumber} - part name: {part.PartName} element id: {part.ElementIds}, category name: {part.CategoryName}");
+                Console.WriteLine($"Missing picture from {part.ColorId}: {part.PartNumber} - part name: {part.PartName} element id: {part.ElementIds} category name: {part.CategoryName}");
             }
             return path;
         }
