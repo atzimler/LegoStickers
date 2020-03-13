@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LegoStickers
+namespace LegoLib
 {
     public static class ElementIds
     {

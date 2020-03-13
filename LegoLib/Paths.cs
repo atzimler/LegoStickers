@@ -1,4 +1,4 @@
-namespace LegoStickers
+namespace LegoLib
 {
     public static class Paths
     {

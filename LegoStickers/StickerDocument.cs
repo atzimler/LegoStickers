@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using LegoLib;
 using Syncfusion.DocIO;
 using Syncfusion.DocIO.DLS;
 using Syncfusion.Drawing;

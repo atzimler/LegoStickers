@@ -1,4 +1,4 @@
-namespace LegoStickers
+namespace LegoLib
 {
     public class PartInformationRecord
     {
