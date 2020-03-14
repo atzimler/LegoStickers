@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using MoreLinq;
 
 namespace LegoLib
 {
@@ -13,8 +14,8 @@ namespace LegoLib
         private static readonly Dictionary<string, PartInformationRecord> PartInformationRecords
             = new Dictionary<string, PartInformationRecord>();
         
-        public static List<InventoryRecord> Inventories = new List<InventoryRecord>();
-        public static List<PartRecord> Parts = new List<PartRecord>();
+        public static Dictionary<string, InventoryRecord> Inventories = new Dictionary<string, InventoryRecord>();
+        public static readonly Dictionary<string, List<PartRecord>> Parts = new Dictionary<string, List<PartRecord>>();
 
         public static string PartPicturePath(PartRecord part)
         {
@@ -55,21 +56,34 @@ namespace LegoLib
                 });
             }
         }
-        
 
-        public static void LoadInventories() =>
-            Inventories = CsvFiles.Load("inventories.csv")
+
+        public static void LoadInventories()
+        {
+            Inventories.Clear();
+
+            CsvFiles.Load("inventories.csv")
                 .Select(line => line.Split(','))
                 .Select(fields => new InventoryRecord
                 {
-                    Id = fields[0], 
-                    Version = fields[1], 
+                    Id = fields[0],
+                    Version = fields[1],
                     SetNumber = fields[2]
                 })
-                .ToList();
+                .ForEach(_ =>
+                {
+                    if (!Inventories.ContainsKey(_.SetNumber))
+                    {
+                        Inventories.Add(_.SetNumber, _);
+                    }
+                });
+        }
 
-        public static void LoadParts() =>
-            Parts = CsvFiles.Load("inventory_parts.csv")
+        public static void LoadParts()
+        {
+            Parts.Clear();
+
+            CsvFiles.Load("inventory_parts.csv")
                 .Select(line => line.Split(','))
                 .Select(fields =>
                 {
@@ -88,7 +102,17 @@ namespace LegoLib
                     };
                 })
                 .Where(_ => _.ElementIds != null && _.CategoryName != "Stickers")
-                .ToList();
+                .ForEach(partRecord =>
+                {
+                    if (!Parts.ContainsKey(partRecord.InventoryId))
+                    {
+                        Parts.Add(partRecord.InventoryId, new List<PartRecord>());
+                    }
+
+                    Parts[partRecord.InventoryId].Add(partRecord);
+                });
+            
+        }
 
         public static void LoadPartCategories()
         {

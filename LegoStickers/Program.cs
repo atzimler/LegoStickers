@@ -18,9 +18,13 @@ namespace LegoStickers
 
             var stickersToPrint = File.ReadAllLines("/Users/atzimler/LegoStickers/stickerlist.txt");
 
-            var inventory = Database.Inventories.First(_ => _.SetNumber == "80105-1");
-            var parts = Database
-                .Parts
+            var inventory = Database.Inventories["80105-1"];
+            var allParts = Database.Parts.Select(_ => _.Value).Aggregate(new List<PartRecord>(), (res, _) =>
+            {
+                res.AddRange(_);
+                return res;
+            });
+            var parts = allParts
 //                .Where(_ => _.InventoryId == inventory.Id)
 //                .Where(_ =>_.ElementIds != null && (_.ElementIds.Contains("4549999") || _.ElementIds.Contains("6214560")))
                 .Where(_ => stickersToPrint.Contains(_.PartNumber) && _.ColorId == "71")

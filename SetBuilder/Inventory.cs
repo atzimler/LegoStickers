@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using LegoLib;
@@ -9,14 +10,9 @@ namespace SetBuilder
     {
         private readonly Dictionary<string, int> _parts = new Dictionary<string, int>();
 
-//        public Inventory(IEnumerable<PartRecord> partRecords)
-//        {
-//            partRecords.ForEach(partRecord =>
-//            {
-//                var quantity = int.Parse(partRecord.Quantity);
-//                _parts.Add(partRecord.ElementIds, quantity);
-//            });
-//        }
+        public IReadOnlyDictionary<string, int> Parts => _parts;
+        public string SetNumber { get; }
+        public int TotalParts { get; private set; }
 
         public Inventory()
         {
@@ -29,11 +25,16 @@ namespace SetBuilder
 
         public Inventory(string setNumber)
         {
-            var inventory = Database.Inventories.First(_ => _.SetNumber == setNumber);
+            SetNumber = setNumber;
+            var inventory = Database.Inventories[setNumber];
 
+            if (!Database.Parts.ContainsKey(inventory.Id))
+            {
+                return;
+            }
+            
             Database
-                .Parts
-                .Where(_ => _.InventoryId == inventory.Id)
+                .Parts[inventory.Id]
                 .ForEach(part => AddParts(part.ElementIds, int.Parse(part.Quantity)));
         }
 
@@ -47,6 +48,8 @@ namespace SetBuilder
             {
                 _parts[elementIds] += quantity;
             }
+
+            TotalParts += quantity;
         }
 
         public static Inventory operator +(Inventory left, Inventory right)
@@ -64,18 +67,24 @@ namespace SetBuilder
             {
                 if (!_parts.ContainsKey(part.Key))
                 {
-                    missing._parts.Add(part.Key, part.Value);
+                    missing.AddParts(part.Key, part.Value);
                     return;
                 }
 
                 var available = _parts[part.Key] - target._parts[part.Key];
                 if (available < 0)
                 {
-                    missing._parts.Add(part.Key, -available);
+                    missing.AddParts(part.Key, -available);
                 }
             });
 
             return missing;
         }
+
+        public int PartsCountFrom(Inventory inventory) =>
+            _parts
+                .Where(_ => inventory._parts.ContainsKey(_.Key))
+                .Select(_ => Math.Min(_.Value, inventory._parts[_.Key]))
+                .Sum();
     }
 }
