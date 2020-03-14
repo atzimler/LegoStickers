@@ -39,7 +39,8 @@ namespace LegoLib
         {
             if (!Data.ContainsKey(partNumber))
             {
-                return null;
+                // Older elements did not have an elementId
+                return $"_{partNumber}_{colorId}";
             }
 
             var partNumberColors = Data[partNumber];
