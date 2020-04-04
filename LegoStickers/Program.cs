@@ -1,10 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using LegoLib;
 
 namespace LegoStickers
 {
+    public class ElementIdsEqualityComparer : IEqualityComparer<PartRecord>
+    {
+        public bool Equals(PartRecord x, PartRecord y) => x.ElementIds == y.ElementIds;
+        public int GetHashCode(PartRecord obj) => 0;
+    }
+    
     internal static class Program
     {
         public static void Main()
@@ -27,28 +34,28 @@ namespace LegoStickers
             var parts = allParts
 //                .Where(_ => _.InventoryId == inventory.Id)
 //                .Where(_ =>_.ElementIds != null && (_.ElementIds.Contains("4549999") || _.ElementIds.Contains("6214560")))
-                .Where(_ => stickersToPrint.Contains(_.PartNumber) && _.ColorId == "71")
+                .Where(_ => stickersToPrint.Contains(_.PartNumber) && _.ColorId == "15")
+                .Distinct(new ElementIdsEqualityComparer())
                 .OrderBy(_ => _.ColorName).ThenBy(_ => _.CategoryName).ThenBy(_ => _.PartNumber)
                 .ToList();
+
+            if (parts.Count != stickersToPrint.Length)
+            {
+                foreach (var partNumber in stickersToPrint)
+                {
+                    if (!parts.Exists(_ => _.PartNumber == partNumber))
+                    {
+                        Console.WriteLine($"Unknown part number: {partNumber}");
+                    }
+                }
+            }
             
             var doc = new StickerDocument();
 
-            var printed = new Dictionary<string, List<string>>(); 
             foreach (var part in parts)
             {
-                if (printed.ContainsKey(part.PartNumber) && printed[part.PartNumber].Contains(part.ColorName))
-                {
-                    continue;
-                }
-
-                if (!printed.ContainsKey(part.PartNumber))
-                {
-                    printed.Add(part.PartNumber, new List<string>());
-                }
-                
                 part.PartPicture = Database.PartPicturePath(part);
                 doc.AddPart(part);
-                printed[part.PartNumber].Add(part.ColorName);
             }
 
             doc.Save("stickers.docx");
