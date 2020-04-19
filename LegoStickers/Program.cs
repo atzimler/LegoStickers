@@ -25,7 +25,7 @@ namespace LegoStickers
 
             var stickersToPrint = File.ReadAllLines("/Users/atzimler/LegoStickers/stickerlist.txt");
 
-            var inventory = Database.Inventories["80105-1"];
+            var inventory = Database.Inventories["60195-1"];
             var allParts = Database.Parts.Select(_ => _.Value).Aggregate(new List<PartRecord>(), (res, _) =>
             {
                 res.AddRange(_);
@@ -34,9 +34,11 @@ namespace LegoStickers
             var parts = allParts
 //                .Where(_ => _.InventoryId == inventory.Id)
 //                .Where(_ =>_.ElementIds != null && (_.ElementIds.Contains("4549999") || _.ElementIds.Contains("6214560")))
-                .Where(_ => stickersToPrint.Contains(_.PartNumber) && _.ColorId == "15")
+                .Where(_ => stickersToPrint.Contains(_.PartNumber) && _.ColorId == "0")
                 .Distinct(new ElementIdsEqualityComparer())
-                .OrderBy(_ => _.ColorName).ThenBy(_ => _.CategoryName).ThenBy(_ => _.PartNumber)
+                .OrderBy(_ => _.ColorName)
+                .ThenBy(_ => _.CategoryName)
+                .ThenBy(_ => _.PartNumber)
                 .ToList();
 
             if (parts.Count != stickersToPrint.Length)
