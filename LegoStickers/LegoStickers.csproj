@@ -71,7 +71,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StickerDocument.cs" />
-    <Compile Include="WTableCellExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

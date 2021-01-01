@@ -12,5 +12,6 @@ namespace LegoLib
         public bool IsSpare { get; set; }
         public string ElementIds { get; set; }
         public string PartPicture { get; set; }
+        public string StorageContainer { get; set; }
     }
 }

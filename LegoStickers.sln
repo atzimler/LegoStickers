@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SetBuilder", "SetBuilder\Se
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegoLib", "LegoLib\LegoLib.csproj", "{A44F0FC4-753A-4BCD-9F95-5906102575C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SetPartListGathering", "SetPartListGathering\SetPartListGathering.csproj", "{34084258-DACA-47E6-A4B0-35CBBED27033}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{A44F0FC4-753A-4BCD-9F95-5906102575C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A44F0FC4-753A-4BCD-9F95-5906102575C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A44F0FC4-753A-4BCD-9F95-5906102575C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34084258-DACA-47E6-A4B0-35CBBED27033}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34084258-DACA-47E6-A4B0-35CBBED27033}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34084258-DACA-47E6-A4B0-35CBBED27033}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34084258-DACA-47E6-A4B0-35CBBED27033}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

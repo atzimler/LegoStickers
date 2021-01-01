@@ -1,7 +1,7 @@
 using Syncfusion.DocIO.DLS;
 using Syncfusion.Drawing;
 
-namespace LegoStickers
+namespace LegoLib
 {
     public static class WTableCellExtensions
     {

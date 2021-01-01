@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using LegoLib;
 using MoreLinq;
 
-namespace SetBuilder
+namespace LegoLib
 {
     public class Inventory
     {

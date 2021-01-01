@@ -14,6 +14,18 @@ namespace LegoStickers
     
     internal static class Program
     {
+        private static bool IsWantedElement(string elementIds)
+        {
+            var wantedList = new List<string>
+            {
+                "6263345", "6139460", "6240210",
+                "4599535", "6024722", "6132418",
+                "6104578", "6102756", "6022032"
+            };
+
+            return wantedList.Any(elementIds.Contains);
+        }
+        
         public static void Main()
         {
             ElementIds.Load();
@@ -31,10 +43,17 @@ namespace LegoStickers
                 res.AddRange(_);
                 return res;
             });
+            var elementIds = new List<string>
+            {
+                "6141590", "6004943", "6100027",
+                "6240550", "6240223"
+            };
+
             var parts = allParts
 //                .Where(_ => _.InventoryId == inventory.Id)
 //                .Where(_ =>_.ElementIds != null && (_.ElementIds.Contains("4549999") || _.ElementIds.Contains("6214560")))
-                .Where(_ => stickersToPrint.Contains(_.PartNumber) && _.ColorId == "0")
+                .Where(_ => stickersToPrint.Contains(_.PartNumber) && _.ColorId == "71")
+//                .Where(_ => elementIds.Any(_.ElementIds.Contains))
                 .Distinct(new ElementIdsEqualityComparer())
                 .OrderBy(_ => _.ColorName)
                 .ThenBy(_ => _.CategoryName)

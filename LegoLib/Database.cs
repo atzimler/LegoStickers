@@ -14,8 +14,10 @@ namespace LegoLib
         private static readonly Dictionary<string, PartInformationRecord> PartInformationRecords
             = new Dictionary<string, PartInformationRecord>();
         
-        public static Dictionary<string, InventoryRecord> Inventories = new Dictionary<string, InventoryRecord>();
+        public static readonly Dictionary<string, InventoryRecord> Inventories = new Dictionary<string, InventoryRecord>();
         public static readonly Dictionary<string, List<PartRecord>> Parts = new Dictionary<string, List<PartRecord>>();
+
+        public static string ColorName(string colorId) => ColorRecords[colorId].Name;
 
         public static string PartPicturePath(PartRecord part)
         {

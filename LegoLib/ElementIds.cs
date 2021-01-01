@@ -5,8 +5,10 @@ namespace LegoLib
 {
     public static class ElementIds
     {
-        private static readonly Dictionary<string, Dictionary<string, List<string>>> Data =
+        private static readonly Dictionary<string, Dictionary<string, List<string>>> Data = 
             new Dictionary<string, Dictionary<string, List<string>>>();
+        private static readonly Dictionary<string, PartRecord> ReverseData = 
+            new Dictionary<string, PartRecord>();
 
         public static void Load()
         {
@@ -32,6 +34,11 @@ namespace LegoLib
                 }
 
                 Data[partNumber][colorId].Add(elementId);
+
+                if (!ReverseData.ContainsKey(elementId))
+                {
+                    ReverseData.Add(elementId, new PartRecord { PartNumber = partNumber, ColorId = colorId });
+                }
             }
         }
 
@@ -57,6 +64,27 @@ namespace LegoLib
             var elements = Data[partNumber][colorId];
             elements.Sort();
             return string.Join(", ", elements);
+        }
+
+        public static PartRecord Lookup(string elementId)
+        {
+            if (ReverseData.ContainsKey(elementId))
+            {
+                return ReverseData[elementId];
+            }
+
+            if (!elementId.Contains(','))
+            {
+                return null;
+            }
+
+            var elementIds = elementId.Split(',');
+            return elementIds
+                .Select(_ => _.Replace(" ", ""))
+                .Select(Lookup)
+                .FirstOrDefault(_ => _ != null);
+            
+            return ReverseData.ContainsKey(elementId) ? ReverseData[elementId] : null;
         }
     }
 }

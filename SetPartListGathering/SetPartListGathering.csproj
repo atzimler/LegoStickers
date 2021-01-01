@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\LegoLib\LegoLib.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="morelinq" Version="3.3.2" />
+      <PackageReference Include="Syncfusion.DocIO.Net.Core" Version="17.4.0.49" />
+    </ItemGroup>
+
+</Project>
