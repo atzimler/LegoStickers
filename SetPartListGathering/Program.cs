@@ -17,6 +17,8 @@ namespace SetPartListGathering
             Database.LoadColors();
             Database.LoadInventories();
             
+            Database.LoadPartInformation();
+            
             // TODO: There is a hidden dependency on ElementIds.Load(). That should be eliminated or handled automatically.
             Database.LoadParts();
 
@@ -29,6 +31,7 @@ namespace SetPartListGathering
                     partRecord.Quantity = _.Value.ToString();
                     partRecord.StorageContainer = StorageContainerInformation.StorageContainer(partRecord);
                     partRecord.PartPicture = Database.PartPicturePath(partRecord);
+                    partRecord.PartName = Database.PartName(partRecord.PartNumber);
 
                     return partRecord;
                 })
@@ -59,17 +62,21 @@ namespace SetPartListGathering
                 var table = section.AddTable();
                 table.TableFormat.IsAutoResized = true;
                 table.TableFormat.IsBreakAcrossPages = false;
-                table.ResetCells(partsInCurrentStorageContainer.Count + 1, 4);
+                table.ResetCells(partsInCurrentStorageContainer.Count + 1, 6);
                 table[0, 0].SetContent("Gathered", 12, Color.Black);
                 table[0, 1].SetContent("Picture", 12, Color.Black);
                 table[0, 2].SetContent("Color", 12, Color.Black);
-                table[0, 3].SetContent("Part Number", 12, Color.Black);
+                table[0, 3].SetContent("Part Name", 12, Color.Black);
+                table[0, 4].SetContent("Part Number", 12, Color.Black);
+                table[0, 5].SetContent("Quantity", 12, Color.Black);
 
                 for (var partIdx = 0; partIdx < partsInCurrentStorageContainer.Count; partIdx++)
                 {
                     var part = partsInCurrentStorageContainer[partIdx];
                     table[partIdx + 1, 2].SetContent(part.ColorName, 12, Color.Black);
-                    table[partIdx + 1, 3].SetContent(part.PartNumber, 12, Color.Black);
+                    table[partIdx + 1, 3].SetContent(part.PartName, 12, Color.Black);
+                    table[partIdx + 1, 4].SetContent(part.PartNumber, 12, Color.Black);
+                    table[partIdx + 1, 5].SetContent(part.Quantity, 12, Color.Black);
 
                     var cell = table[partIdx + 1, 1];
                     cell.AddParagraph();

@@ -149,5 +149,8 @@ namespace LegoLib
                 });
             }
         }
+
+        public static string PartName(string partNumber) 
+            => PartInformationRecords.ContainsKey(partNumber) ? PartInformationRecords[partNumber].Name : null;
     }
 }

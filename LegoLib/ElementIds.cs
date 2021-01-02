@@ -89,8 +89,6 @@ namespace LegoLib
                 .Select(_ => _.Replace(" ", ""))
                 .Select(Lookup)
                 .FirstOrDefault(_ => _ != null);
-            
-            return ReverseData.ContainsKey(elementId) ? ReverseData[elementId] : null;
         }
     }
 }
