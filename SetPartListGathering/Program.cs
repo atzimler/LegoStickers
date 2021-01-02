@@ -46,7 +46,8 @@ namespace SetPartListGathering
 
             var document = new WordDocument();
             var section = document.AddSection();
-            for (var idx = 0; idx < parts.Count; ++idx)
+            var idx = 0;
+            while (idx < parts.Count)
             {
                 var currentStorageContainer = parts[idx].StorageContainer;
                 var partsInCurrentStorageContainer = new List<PartRecord>();
