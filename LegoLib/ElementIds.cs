@@ -68,6 +68,12 @@ namespace LegoLib
 
         public static PartRecord Lookup(string elementId)
         {
+            if (elementId.StartsWith("_"))
+            {
+                var parts = elementId.Split('_');
+                return new PartRecord { PartNumber = parts[1], ColorId = parts[2] };
+            }
+            
             if (ReverseData.ContainsKey(elementId))
             {
                 return ReverseData[elementId];

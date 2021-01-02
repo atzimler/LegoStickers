@@ -52,7 +52,7 @@ namespace LegoStickers
             var parts = allParts
 //                .Where(_ => _.InventoryId == inventory.Id)
 //                .Where(_ =>_.ElementIds != null && (_.ElementIds.Contains("4549999") || _.ElementIds.Contains("6214560")))
-                .Where(_ => stickersToPrint.Contains(_.PartNumber) && _.ColorId == "71")
+                .Where(_ => stickersToPrint.Contains(_.PartNumber) && _.ColorId == "0")
 //                .Where(_ => elementIds.Any(_.ElementIds.Contains))
                 .Distinct(new ElementIdsEqualityComparer())
                 .OrderBy(_ => _.ColorName)
