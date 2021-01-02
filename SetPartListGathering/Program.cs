@@ -32,11 +32,14 @@ namespace SetPartListGathering
                     partRecord.StorageContainer = StorageContainerInformation.StorageContainer(partRecord);
                     partRecord.PartPicture = Database.PartPicturePath(partRecord);
                     partRecord.PartName = Database.PartName(partRecord.PartNumber);
+                    partRecord.MainPartNumber = Database.MainPartNumber(partRecord.PartNumber);
 
                     return partRecord;
                 })
                 .OrderBy(_ => _.StorageContainer)
                 .ThenBy(_ => _.ColorName)
+                .ThenBy(_ => _.MainPartNumber)
+                .ThenBy(_ => _.PartNumber)
                 .ToList();
 
             parts.ForEach(_ => Console.WriteLine($"{_.StorageContainer}, {_.ColorName}, {_.PartNumber}, {_.Quantity}"));

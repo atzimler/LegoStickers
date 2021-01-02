@@ -600,12 +600,7 @@ namespace LegoLib
 
         public static string StorageContainer(PartRecord partRecord)
         {
-            var hash = partRecord.PartNumber;
-            while (!int.TryParse(hash, out var unused))
-            {
-                hash = hash.Remove(hash.Length - 1);
-            }
-            
+            var hash = Database.MainPartNumber(partRecord.PartNumber).ToString();
             hash = hash.Substring(hash.Length - 2, 2);
 
             return Containers.FirstOrDefault(_ => _.ColorName == partRecord.ColorName 

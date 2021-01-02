@@ -13,5 +13,6 @@ namespace LegoLib
         public string ElementIds { get; set; }
         public string PartPicture { get; set; }
         public string StorageContainer { get; set; }
+        public int MainPartNumber { get; set; }
     }
 }

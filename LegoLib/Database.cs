@@ -150,6 +150,16 @@ namespace LegoLib
             }
         }
 
+        public static int MainPartNumber(string partNumber)
+        {
+            while (!int.TryParse(partNumber, out var unused))
+            {
+                partNumber = partNumber.Remove(partNumber.Length - 1);
+            }
+
+            return int.Parse(partNumber);
+        }
+
         public static string PartName(string partNumber) 
             => PartInformationRecords.ContainsKey(partNumber) ? PartInformationRecords[partNumber].Name : null;
     }
