@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using LegoLib;
 
-namespace SetPartListGathering
+namespace LegoLib
 {
     public class StorageContainerInformation
     {
@@ -602,7 +601,7 @@ namespace SetPartListGathering
         public static string StorageContainer(PartRecord partRecord)
         {
             var hash = partRecord.PartNumber;
-            while (!int.TryParse(hash[^1].ToString(), out var unused))
+            while (!int.TryParse(hash, out var unused))
             {
                 hash = hash.Remove(hash.Length - 1);
             }

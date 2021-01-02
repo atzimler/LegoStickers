@@ -50,6 +50,7 @@
     <ItemGroup>
         <Compile Include="ElementIdsShould.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="StorageContainerInformationShould.cs" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\LegoLib\LegoLib.csproj">
