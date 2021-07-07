@@ -22,7 +22,8 @@ namespace SetPartListGathering
             // TODO: There is a hidden dependency on ElementIds.Load(). That should be eliminated or handled automatically.
             Database.LoadParts();
 
-            var parts = new Inventory("80105-1")
+            var set = "21318-1";
+            var parts = new Inventory(set)
                 .Parts
                 .Select(_ =>
                 {
@@ -102,7 +103,7 @@ namespace SetPartListGathering
                 section.AddParagraph();
             }
 
-            using var fs = File.OpenWrite("/tmp/x.docx");
+            using var fs = File.OpenWrite($"/tmp/{set}.docx");
             document.Save(fs, FormatType.Docx);
             
             document.Close();

@@ -19,6 +19,8 @@ namespace LegoLib
         private const string LotOfColors = "Bright Light Yellow / Bright Pink / Dark Turquoise / Light Aqua / Lime / Medium Dark Flesh / Medium Lavender / Metallic Gold / Metallic Silver / Olive Green";
         private const string Red = "Red";
         private const string RedContainer = "Red {0} - {1}";
+        private const string ReddishBrown = "Reddish Brown";
+        private const string ReddishBrownContainer = "Reddish Brown {0} - {1}";
         private const string TransDarkBlueTransGreenTransLightBlueTransOrange = "Trans-Dark Blue / Trans-Green / Trans-Light Blue / Trans-Orange";
         private const string TransparentRest = "Transparent Rest";
         private const string White = "White";
@@ -374,6 +376,13 @@ namespace LegoLib
             },
             new StorageContainerInformation
             {
+                ColorName = "Medium Blue",
+                From = "00",
+                To = "99",
+                Name = WhiteMediumBlue,
+            },
+            new StorageContainerInformation
+            {
                 ColorName = "Medium Dark Flesh",
                 From = "00",
                 To = "99",
@@ -437,10 +446,17 @@ namespace LegoLib
             },
             new StorageContainerInformation
             {
-                ColorName = "Reddish Brown",
+                ColorName = ReddishBrown,
                 From = "00",
+                To = "49",
+                Name = string.Format(ReddishBrownContainer, "00", "49")
+            },
+            new StorageContainerInformation
+            {
+                ColorName = ReddishBrown,
+                From = "50",
                 To = "99",
-                Name = "Reddish Brown"
+                Name = string.Format(ReddishBrownContainer, "50", "99")
             },
             new StorageContainerInformation
             {
@@ -595,6 +611,13 @@ namespace LegoLib
                 From = "00",
                 To = "99",
                 Name = DarkGreenDarkTanGreenMagentaYellowishGreen
+            },
+            new StorageContainerInformation
+            {
+                ColorName = "Bright Light Blue",
+                From = "00",
+                To = "99",
+                Name = WhiteBrightLightBlue
             }
         };
 
