@@ -7,7 +7,7 @@ namespace LegoLib
     {
         private const string Black = "Black";
         private const string BlackContainer = "Black {0} - {1}";
-        private const string BrightGreenDarkOrangeDarkPinkDarkPurpleSandGreen = "Bright Green / Dark Orange / Dark Pink / Dark Purple / Sand Green";
+        private const string BrightGreenDarkOrangeDarkPinkDarkPurpleFlatSilverSandGreen = "Bright Green / Dark Orange / Dark Pink / Dark Purple / Flat Silver / Sand Green";
         private const string BrightLightOrangeDarkBrownLavenderMediumAzure = "Bright Light Orange / Dark Brown / Lavender / Medium Azure";
         private const string DarkAzureYellow = "Dark Azure / Yellow";
         private const string DarkBluishGrey = "Dark Bluish Gray";
@@ -114,7 +114,7 @@ namespace LegoLib
                 ColorName = "Bright Green",
                 From = "00",
                 To = "99",
-                Name = BrightGreenDarkOrangeDarkPinkDarkPurpleSandGreen
+                Name = BrightGreenDarkOrangeDarkPinkDarkPurpleFlatSilverSandGreen
             },
             new StorageContainerInformation
             {
@@ -226,21 +226,21 @@ namespace LegoLib
                 ColorName = "Dark Orange",
                 From = "00",
                 To = "99",
-                Name = BrightGreenDarkOrangeDarkPinkDarkPurpleSandGreen
+                Name = BrightGreenDarkOrangeDarkPinkDarkPurpleFlatSilverSandGreen
             },
             new StorageContainerInformation
             {
                 ColorName = "Dark Pink",
                 From = "00",
                 To = "99",
-                Name = BrightGreenDarkOrangeDarkPinkDarkPurpleSandGreen
+                Name = BrightGreenDarkOrangeDarkPinkDarkPurpleFlatSilverSandGreen
             },
             new StorageContainerInformation
             {
                 ColorName = "Dark Purple",
                 From = "00",
                 To = "99",
-                Name = BrightGreenDarkOrangeDarkPinkDarkPurpleSandGreen
+                Name = BrightGreenDarkOrangeDarkPinkDarkPurpleFlatSilverSandGreen
             },
             new StorageContainerInformation
             {
@@ -262,6 +262,13 @@ namespace LegoLib
                 From = "00",
                 To = "99",
                 Name = LotOfColors
+            },
+            new StorageContainerInformation
+            {
+                ColorName = "Flat Silver",
+                From = "00",
+                To = "99",
+                Name = BrightGreenDarkOrangeDarkPinkDarkPurpleFlatSilverSandGreen
             },
             new StorageContainerInformation
             {
@@ -471,7 +478,7 @@ namespace LegoLib
                 ColorName = "Sand Green",
                 From = "00",
                 To = "99",
-                Name = BrightGreenDarkOrangeDarkPinkDarkPurpleSandGreen
+                Name = BrightGreenDarkOrangeDarkPinkDarkPurpleFlatSilverSandGreen
             },
             new StorageContainerInformation
             {
