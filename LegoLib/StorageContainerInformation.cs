@@ -27,6 +27,7 @@ namespace LegoLib
         private const string WhiteBrightLightBlue = "White 40 - 59 / Bright Light Blue";
         private const string WhiteContainer = "White {0} - {1}";
         private const string WhiteMediumBlue = "White 20 - 39 / Medium Blue";
+        private const string WhitePearlDarkGrey = "White 60 - 79 / Pearl Dark Grey";
         private const string WhiteSandBlue = "White 00 - 19 / Sand Blue";
         
         private static readonly List<StorageContainerInformation> Containers = new List<StorageContainerInformation>
@@ -423,6 +424,13 @@ namespace LegoLib
                 To = "99",
                 Name = "Orange"
             },
+            new StorageContainerInformation 
+            {
+                ColorName = "Pearl Dark Grey",
+                From = "00",
+                To = "99",
+                Name = WhitePearlDarkGrey
+            },
             new StorageContainerInformation
             {
                 ColorName = "Pearl Gold",
@@ -589,7 +597,7 @@ namespace LegoLib
                 ColorName = White,
                 From = "60",
                 To = "79",
-                Name = string.Format(WhiteContainer, "60", "79")
+                Name = WhitePearlDarkGrey
             },
             new StorageContainerInformation
             {
